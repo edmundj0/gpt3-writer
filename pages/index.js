@@ -14,14 +14,21 @@ const Home = () => {
       <div className="container">
         <div className="header">
           <div className="header-title">
-            <h1>Feel Supported, Whenever You Need It</h1>
+            <h1>Easy API Documentation Generator</h1>
           </div>
           <div className="header-subtitle">
-            <h2>insert your subtitle here</h2>
+            <h2>Just Input Your API code below</h2>
           </div>
         </div>
         <div className='prompt-container'>
           <textarea placeholder='start-typing-here' className='prompt-box' value={userInput} onChange={(e)=>setUserInput(e.target.value)}></textarea>
+        </div>
+        <div className='prompt-buttons'>
+          <a className='generate-button' onClick={null}>
+            <div className='generate'>
+              <p>Generate</p>
+            </div>
+          </a>
         </div>
 
       </div>
