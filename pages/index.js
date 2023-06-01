@@ -5,6 +5,28 @@ import { useState } from 'react';
 
 const Home = () => {
   const [userInput, setUserInput] = useState("")
+  const [apiOutput, setApiOutput] = useState("")
+  const [isGenerating, setIsGenerating] = useState(false)
+
+  const callGenerateEndpoint = async () => {
+    setIsGenerating(true)
+
+    console.log("calling openai")
+    const response = await fetch('/api/generate', { //next automatically creates this route based on folder directory
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({userInput})
+    })
+
+    const data = response.json()
+    const { output } = data;
+    console.log("output: ", output)
+    console.log("OpenAI replied...", output.text)
+
+    setApiOutput(`${output.text}`)
+    setIsGenerating(false)
+
+  }
 
   return (
     <div className="root">
@@ -24,7 +46,7 @@ const Home = () => {
           <textarea placeholder='start-typing-here' className='prompt-box' value={userInput} onChange={(e)=>setUserInput(e.target.value)}></textarea>
         </div>
         <div className='prompt-buttons'>
-          <a className='generate-button' onClick={null}>
+          <a className='generate-button' onClick={callGenerateEndpoint}>
             <div className='generate'>
               <p>Generate</p>
             </div>
