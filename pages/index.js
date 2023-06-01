@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import buildspaceLogo from '../assets/buildspace-logo.png';
 import { useState } from 'react';
+import Output from './components/output';
 
 const Home = () => {
   const [userInput, setUserInput] = useState("")
@@ -18,7 +19,8 @@ const Home = () => {
       body: JSON.stringify({userInput})
     })
 
-    const data = response.json()
+    const data = await response.json()
+    console.log(data, 'data')
     const { output } = data;
     console.log("output: ", output)
     console.log("OpenAI replied...", output.text)
@@ -43,7 +45,7 @@ const Home = () => {
           </div>
         </div>
         <div className='prompt-container'>
-          <textarea placeholder='start-typing-here' className='prompt-box' value={userInput} onChange={(e)=>setUserInput(e.target.value)}></textarea>
+          <textarea placeholder='Paste code for your API Endpoint: ' className='prompt-box' value={userInput} onChange={(e)=>setUserInput(e.target.value)}></textarea>
         </div>
         <div className='prompt-buttons'>
           <a className={isGenerating ? 'generate-button loading' : 'generate-button'} onClick={callGenerateEndpoint}>
@@ -52,6 +54,7 @@ const Home = () => {
             </div>
           </a>
         </div>
+        <Output apiOutput={apiOutput} />
 
       </div>
       <div className="badge-container grow">
