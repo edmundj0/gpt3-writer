@@ -1,5 +1,11 @@
 # API Documentation Writer
 ### Welcome
+
+```
+touch .env
+```
+Follow .env.example
+
 ```
 npm install && npm run dev
 ```
